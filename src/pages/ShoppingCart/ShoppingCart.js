@@ -3,12 +3,6 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import "./ShoppingCart.css"
 
 
-const cartItems = [{
-    id: 1,
-    name: "Chaussure 1",
-    price: 19.99,
-    quantity: 1
-}];
 const ShoppingCart = () => {
     const { search } = useLocation();
     const [searchParams] = useSearchParams(search);
@@ -42,9 +36,15 @@ const ShoppingCart = () => {
         return total.toFixed(2);
         };
 
-    const checkout = () => {
     
-    };
+
+    handleBuyProduct = async (productId, productPrice) => {
+        const { contract, defaultAccount } = this.state;
+    
+        // Appeler la fonction "acheteProduit" du contrat pour acheter un produit spécifique
+        await contract.methods.acheteProduit(productId).send({ from: defaultAccount, gas: 3000000, value: productPrice });
+    
+        }
 
   return (
     <div>
@@ -61,7 +61,7 @@ const ShoppingCart = () => {
             {/* <button onClick={() => removeFromCart(item)}>Remove</button> */}
         </div>
             <h4>Sum：{calculateTotal()} Ether</h4>
-            <button onClick={checkout}>Payer</button>
+            <button onClick={() => this.handleBuyProduct(product.id, product.prix)}>Payer</button>
         </div>
     </div>
   );
