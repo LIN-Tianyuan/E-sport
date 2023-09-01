@@ -1,7 +1,7 @@
 import './App.css';
 
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar  from './components/Navbar';
 import Accueil from './pages/Accueil/Accueil';
 import Footer from './components/Footer';
@@ -11,6 +11,7 @@ import Sell from './pages/Sell/Sell';
 import Buy from './pages/Buy/Buy';
 import Login from './pages/Login/Login';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
+import Register from './pages/Register/Register';
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/Sell" element={<Sell/>} />
         <Route path="/Buy" element={<Buy/>} />
         <Route path="/Login" element={<Login/>} />
+        <Route path="/Register" element={<Register/>} />
         <Route path="/ShoppingCart" element={<ShoppingCart/>} />
       </Routes>
       <Footer />

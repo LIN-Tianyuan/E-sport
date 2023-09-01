@@ -1,8 +1,14 @@
-import React, {useState} from "react";
+/*import React, {useState} from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import "./ShoppingCart.css"
 
 
+const cartItems = [{
+    id: 1,
+    name: "Chaussure 1",
+    price: 19.99,
+    quantity: 1
+}];
 const ShoppingCart = () => {
     const { search } = useLocation();
     const [searchParams] = useSearchParams(search);
@@ -36,35 +42,29 @@ const ShoppingCart = () => {
         return total.toFixed(2);
         };
 
+    const checkout = () => {
     
+    };*/
 
-    handleBuyProduct = async (productId, productPrice) => {
-        const { contract, defaultAccount } = this.state;
-    
-        // Appeler la fonction "acheteProduit" du contrat pour acheter un produit spécifique
-        await contract.methods.acheteProduit(productId).send({ from: defaultAccount, gas: 3000000, value: productPrice });
-    
-        }
+//  return (
+//    <div>
+//      <h2>Panier</h2>
+//        <div class="mainc">
+ //           <img class="imgc" src={image}></img>
+//            <h3>{productname}</h3>
+//            <p>Price：{price}</p>
+//            <p>Number：</p>
+//            <div className="quantity">
+//            <button className="btn" onClick={decreaseQuantity}>-</button>
+//            <input type="number" value={quantity} min="1" readOnly />
+//            <button className="btn" onClick={increaseQuantity}>+</button>
+//           {/* <button onClick={() => removeFromCart(item)}>Remove</button> */}
+//        </div>
+//            <h4>Sum：{calculateTotal()} Ether</h4>
+//            <button onClick={checkout}>Payer</button>
+//        </div>
+//    </div>
+//  );
+//};
 
-  return (
-    <div>
-      <h2>Panier</h2>
-        <div class="mainc">
-            <img class="imgc" src={image}></img>
-            <h3>{productname}</h3>
-            <p>Price：{price}</p>
-            <p>Number：</p>
-            <div className="quantity">
-            <button className="btn" onClick={decreaseQuantity}>-</button>
-            <input type="number" value={quantity} min="1" readOnly />
-            <button className="btn" onClick={increaseQuantity}>+</button>
-            {/* <button onClick={() => removeFromCart(item)}>Remove</button> */}
-        </div>
-            <h4>Sum：{calculateTotal()} Ether</h4>
-            <button onClick={() => this.handleBuyProduct(product.id, product.prix)}>Payer</button>
-        </div>
-    </div>
-  );
-};
-
-export default ShoppingCart;
+//export default ShoppingCart;

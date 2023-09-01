@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../MyContext';
+import { logInWithEmailAndPassword } from '../../firebase';
+//import { setAlert } from '../../store'
 import "./Login.css"
 
 function Login() {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const navigate = useNavigate();
+  const { setUser, setAuthentication } = useTheme();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    
-    const username = event.target.username.value;
-    const password = event.target.password.value;
 
-    if (username === "admin" && password === "password") {
-      alert("Connexion réussie !");
-      navigate("/", {state: {username}});
-    } else {
-      alert("La connexion a échoué, veuillez vérifier l'identifiant et le mot de passe.");
-    }
+    if (email === '' || password === '') return
+    logInWithEmailAndPassword(email, password).then((user) => {
+      if (user){
+        alert("Connexion réussie !");
+        setUser(email);
+        setAuthentication(true);
+        navigate('/')
+      }else {
+        alert("E-mail ou mot de passe incorrect, veuillez le saisir à nouveau.")
+      }
+    })
+
+    // if (username === "admin" && password === "password") {
+    //   alert("Connexion réussie !");
+    //   navigate("/", {state: {username}});
+    // } else {
+    //   alert("La connexion a échoué, veuillez vérifier l'identifiant et le mot de passe.");
+    // }
   };
 
   return (
@@ -24,12 +40,26 @@ function Login() {
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Identifiant:</label>
-          <input type="text" id="username" name="username" required />
+          <label htmlFor="email">Email:</label>
+          <input 
+            type="text" 
+            id="email" 
+            name="email"
+            placeholder="Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+            required />
         </div>
         <div className="form-group">
           <label htmlFor="password">Mot de passe:</label>
-          <input type="password" id="password" name="password" required />
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            placeholder="Mot de passe" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+            required />
         </div>
         <button type="submit">Se connecter</button>
       </form>
